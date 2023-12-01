@@ -1,17 +1,13 @@
-# Stage 1: Use secsi/apktool as the base image
-FROM secsi/apktool as apktool_base
 
-# Stage 2: Extend with additional dependencies from ubuntu:bionic
 FROM ubuntu:bionic
+FROM secsi/apktool as apktool_base
 
 # Copy necessary files from the first stage
 COPY --from=apktool_base /usr/local/bin/apktool /usr/local/bin/apktool
 COPY --from=apktool_base /usr/local/bin/apktool.jar /usr/local/bin/apktool.jar
 
 # Install any additional dependencies you need from ubuntu:bionic
-RUN apt-get update && \
-    apt-get install -y <package1> <package2> && \
-    rm -rf /var/lib/apt/lists/*
+RUN apktool --version
 
 # Set the working directory
 WORKDIR /app
