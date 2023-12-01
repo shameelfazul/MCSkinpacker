@@ -1,7 +1,7 @@
 FROM ubuntu:20.04
 
 
-RUN apt-get update && apt-get install -y curl && apt-get install default-jre
+RUN apt-get update && apt-get install -y curl && apt-get install -y default-jre
 # Download the Linux wrapper script for Apktool and save it as apktool
 RUN curl -o apktool https://raw.githubusercontent.com/iBotPeaches/Apktool/master/scripts/linux/apktool && \
     chmod +x apktool
