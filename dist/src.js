@@ -34,6 +34,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
+var _a;
 Object.defineProperty(exports, "__esModule", { value: true });
 const playwright_chromium_1 = require("playwright-chromium");
 const express_1 = __importDefault(require("express"));
@@ -44,8 +45,10 @@ const shelljs_1 = __importDefault(require("shelljs"));
 const readline_1 = __importDefault(require("readline"));
 const fs = __importStar(require("fs"));
 const posix_1 = __importDefault(require("path/posix"));
+const discord_webhook_node_1 = require("discord-webhook-node");
 dotenv_1.default.config();
 const app = (0, express_1.default)();
+const hook = new discord_webhook_node_1.Webhook((_a = process.env.DISCORD) !== null && _a !== void 0 ? _a : 'undefined');
 app.use(express_1.default.json({ limit: '50mb' }));
 app.use(express_1.default.urlencoded({ extended: true }));
 app.post('/', (req, res) => {
@@ -131,7 +134,9 @@ function main() {
             yield drive.permissions.create({ fileId: upload.data.id, requestBody: { role: 'reader', type: 'anyone' } });
             const url = yield drive.files.get({ fileId: upload.data.id, fields: 'webContentLink' });
             console.log(`[Skinpacker] : file has been uploaded to drive`);
-            console.log(url.data.webContentLink);
+            hook.setUsername('MCSkinpacker');
+            hook.setAvatar('https://static.wikia.nocookie.net/minecraft_gamepedia/images/d/d9/Bedrock_Edition_App_Store_icon_2.png/revision/latest/scale-to-width-down/250?cb=20230919155825');
+            hook.send(`Skinpack request is complete! -> ${url.data.webContentLink}`);
         }
         catch (e) {
             console.log(e.message);
