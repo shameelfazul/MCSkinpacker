@@ -2,7 +2,7 @@ FROM ubuntu:20.04
 
 
 
-RUN apt update && apt install snapd
+RUN apt update && apt install -y snapd
 RUN snap install apktool
 RUN snap --version
 
