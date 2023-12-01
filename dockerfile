@@ -14,10 +14,7 @@ RUN apt-get update \
         snapd \
     && snap install apktool --classic \
     && npx playwright install-deps \
-    && npx playwright install chromium \
-    && apt-get autoremove -y \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+    && npx playwright install chromium 
 
 WORKDIR /usr/src/
 
