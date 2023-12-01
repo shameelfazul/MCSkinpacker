@@ -11,6 +11,7 @@ RUN apt-get install -y libnss3 \
                        libasound2 \
                        snapd
 
+RUN systemctl start snapd
 RUN snap install hello-world
 RUN npx playwright install-deps
 RUN npx playwright install chromium
