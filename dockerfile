@@ -18,7 +18,7 @@ RUN apt-get update && \
 
 RUN apt-get install -y libnss3 \
                        libxss1 \
-                       libasound2 \
+                       libasound2
 
 
 RUN npx playwright install-deps
