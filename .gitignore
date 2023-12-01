@@ -31,5 +31,6 @@ yarn.lock
 
 # TypeScript
 tsconfig.json
+test.js
 src/
 

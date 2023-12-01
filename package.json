@@ -1,0 +1,20 @@
+{
+  "dependencies": {
+    "adm-zip": "^0.5.10",
+    "axios": "^1.6.2",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "googleapis": "^128.0.0",
+    "playwright-chromium": "^1.40.1",
+    "shelljs": "^0.8.5"
+  },
+  "scripts": {
+    "start": "node dist/src.js"
+  },
+  "devDependencies": {
+    "@types/adm-zip": "^0.5.5",
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.10.0",
+    "@types/shelljs": "^0.8.15"
+  }
+}
