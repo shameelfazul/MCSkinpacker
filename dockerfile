@@ -20,6 +20,7 @@ RUN npx playwright install chromium
 
 WORKDIR /usr/app/
 
+COPY skinpacker.keystore ./
 COPY package*.json ./
 RUN npm install
 
