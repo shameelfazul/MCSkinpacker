@@ -1,45 +1,26 @@
-FROM ubuntu:20.04
+# Stage 1: Use secsi/apktool as the base image
+FROM secsi/apktool as apktool_base
 
-RUN apt-get update && apt-get install -y curl && \
-    curl -sL https://deb.nodesource.com/setup_20.x | bash - && \
-    apt-get install -y nodejs
+# Stage 2: Extend with additional dependencies from ubuntu:bionic
+FROM ubuntu:bionic
 
-RUN apt-get install -y libnss3 \
-                       libxss1 \
-                       libasound2 \
-                       snapd
+# Copy necessary files from the first stage
+COPY --from=apktool_base /usr/local/bin/apktool /usr/local/bin/apktool
+COPY --from=apktool_base /usr/local/bin/apktool.jar /usr/local/bin/apktool.jar
 
-# Fetch the latest Apktool version
-ARG APKTOOL_VERSION=$(curl -s "https://api.github.com/repos/iBotPeaches/Apktool/releases/latest" | grep -Po '"tag_name": "v\K[0-9.]+')
+# Install any additional dependencies you need from ubuntu:bionic
+RUN apt-get update && \
+    apt-get install -y <package1> <package2> && \
+    rm -rf /var/lib/apt/lists/*
 
-# Download Apktool files
-RUN curl -Lo /apktool.jar "https://github.com/iBotPeaches/Apktool/releases/latest/download/apktool_${APKTOOL_VERSION}.jar"
-RUN curl -o /apktool "https://raw.githubusercontent.com/iBotPeaches/Apktool/master/scripts/linux/apktool"
-RUN chmod +x /apktool.jar /apktool
+# Set the working directory
+WORKDIR /app
 
-# Stage 2: Final stage
-FROM openjdk:8-jre-slim
+# Copy your application code or additional files
+# ...
 
-# Copy Apktool files from the builder stage
-COPY --from=builder /apktool.jar /usr/local/bin/apktool.jar
-COPY --from=builder /apktool /usr/local/bin/apktool
+# Set any environment variables if needed
+# ...
 
-# Set execute permissions
-RUN chmod +x /usr/local/bin/apktool.jar /usr/local/bin/apktool
-
-
-RUN npx playwright install-deps
-RUN npx playwright install chromium
-
-WORKDIR /usr/src/
-
-COPY package*.json ./
-RUN npm install
-
-COPY dist ./
-
-EXPOSE 5050
-
-USER node
-
-CMD ["node", "src"]
+# Define the default command to run when the container starts
+CMD ["bash"]
