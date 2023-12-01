@@ -7,7 +7,7 @@ RUN curl -o apktool https://raw.githubusercontent.com/iBotPeaches/Apktool/master
     chmod +x apktool
 
 # Download the latest version of Apktool and rename the JAR file
-RUN RUN wget -O apktool.jar https://bitbucket.org/iBotPeaches/apktool/downloads/apktool_2.9.0.jar
+RUN curl -L -o apktool.jar https://bitbucket.org/iBotPeaches/apktool/downloads/apktool_2.9.0.jar
 
 # Move both apktool.jar and the wrapper script to /usr/local/bin
 RUN mv apktool apktool.jar /usr/local/bin/
