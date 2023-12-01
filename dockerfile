@@ -9,13 +9,7 @@ RUN apt-get install -y libnss3 \
                        libasound2 \
                        snapd
 
-RUN apt-get update && \
-    apt-get install -y default-jre default-jdk wget
-
-RUN wget https://raw.githubusercontent.com/iBotPeaches/Apktool/master/scripts/linux/apktool -O /usr/local/bin/apktool && \
-    wget https://bitbucket.org/iBotPeaches/apktool/downloads/apktool_2.5.2.jar -O /usr/local/bin/apktool.jar && \
-    chmod +x /usr/local/bin/apktool
-
+RUN sudo snap install apktool
 RUN npx playwright install-deps
 RUN npx playwright install chromium
 
