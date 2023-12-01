@@ -28,8 +28,6 @@ COPY dist ./src/
 
 EXPOSE 5050
 
-USER node
-
 WORKDIR /usr/app/src/
 
 CMD ["node", "src"]
