@@ -1,13 +1,17 @@
 FROM ubuntu:20.04
 
+# Download the Linux wrapper script for Apktool and save it as apktool
+RUN curl -o apktool https://raw.githubusercontent.com/iBotPeaches/Apktool/master/scripts/linux/apktool && \
+    chmod +x apktool
 
+# Download the latest version of Apktool and rename the JAR file
+RUN curl -Lo apktool.jar https://bitbucket.org/iBotPeaches/apktool/downloads/$(curl -s https://api.bitbucket.org/2.0/repositories/iBotPeaches/apktool/downloads | jq -r '.values[0].links.self.href' | awk -F'/' '{print $NF}')
 
-RUN apt update && apt install -y snapd
-RUN apt-get update && apt-get install -yqq daemonize dbus-user-session fontconfig
-RUN daemonize /usr/bin/unshare --fork --pid --mount-proc /lib/systemd/systemd --system-unit=basic.target
-RUN nsenter -t $(pidof systemd) -a su - "$LOGNAME"
-# RUN snap install apktool
-RUN snap --version
+# Move both apktool.jar and the wrapper script to /usr/local/bin
+RUN mv apktool apktool.jar /usr/local/bin/
+
+# Make both files executable
+RUN chmod +x /usr/local/bin/apktool /usr/local/bin/apktool.jar
 
 # RUN apt-get update && apt-get install -y curl && \
 #     curl -sL https://deb.nodesource.com/setup_20.x | bash - && \
