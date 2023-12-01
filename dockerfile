@@ -1,5 +1,6 @@
 FROM ubuntu:20.04
 
+RUN apt install default-jre
 
 RUN apt-get update && apt-get install -y curl
 # Download the Linux wrapper script for Apktool and save it as apktool
