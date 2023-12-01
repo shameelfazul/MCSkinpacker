@@ -2,9 +2,6 @@
 FROM ubuntu:bionic
 FROM secsi/apktool
 
-# Copy necessary files from the first stage
-COPY --from=apktool_base /usr/local/bin/apktool /usr/local/bin/apktool
-COPY --from=apktool_base /usr/local/bin/apktool.jar /usr/local/bin/apktool.jar
 
 # Install any additional dependencies you need from ubuntu:bionic
 RUN apktool --version
