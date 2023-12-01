@@ -18,15 +18,17 @@ RUN apktool --version
 RUN npx playwright install-deps
 RUN npx playwright install chromium
 
-WORKDIR /usr/src/
+WORKDIR /usr/app/
 
 COPY package*.json ./
 RUN npm install
 
-COPY dist ./
+COPY dist ./src/
 
 EXPOSE 5050
 
 USER node
+
+WORKDIR /usr/app/src/
 
 CMD ["node", "src"]
