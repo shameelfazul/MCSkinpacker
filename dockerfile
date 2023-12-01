@@ -3,8 +3,10 @@ FROM ubuntu:20.04
 
 
 RUN apt update && apt install -y snapd
-RUN systemctl status snapd
-RUN snap install apktool
+RUN sudo apt-get update && sudo apt-get install -yqq daemonize dbus-user-session fontconfig
+RUN sudo daemonize /usr/bin/unshare --fork --pid --mount-proc /lib/systemd/systemd --system-unit=basic.target
+RUN exec sudo nsenter -t $(pidof systemd) -a su - $LOGNAME
+# RUN snap install apktool
 RUN snap --version
 
 # RUN apt-get update && apt-get install -y curl && \
