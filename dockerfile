@@ -1,6 +1,6 @@
 
 FROM ubuntu:bionic
-FROM secsi/apktool as apktool_base
+FROM secsi/apktool
 
 # Copy necessary files from the first stage
 COPY --from=apktool_base /usr/local/bin/apktool /usr/local/bin/apktool
