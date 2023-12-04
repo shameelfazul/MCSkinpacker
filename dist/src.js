@@ -134,9 +134,10 @@ function main() {
             yield drive.permissions.create({ fileId: upload.data.id, requestBody: { role: 'reader', type: 'anyone' } });
             const url = yield drive.files.get({ fileId: upload.data.id, fields: 'webContentLink' });
             console.log(`[Skinpacker] : file has been uploaded to drive`);
-            hook.setUsername('MCSkinpacker');
-            hook.setAvatar('https://static.wikia.nocookie.net/minecraft_gamepedia/images/d/d9/Bedrock_Edition_App_Store_icon_2.png/revision/latest/scale-to-width-down/250?cb=20230919155825');
-            yield hook.send(`Skinpack request is complete! -> ${url.data.webContentLink}`);
+            // hook.setUsername('MCSkinpacker');
+            // hook.setAvatar('https://static.wikia.nocookie.net/minecraft_gamepedia/images/d/d9/Bedrock_Edition_App_Store_icon_2.png/revision/latest/scale-to-width-down/250?cb=20230919155825');
+            // await hook.send(`Skinpack request is complete! -> ${url.data.webContentLink}`);
+            console.log(url.data.webContentLink);
         }
         catch (e) {
             console.log(e.message);
