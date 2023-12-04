@@ -2,12 +2,14 @@
   "dependencies": {
     "adm-zip": "^0.5.10",
     "axios": "^1.6.2",
-    "discord-webhook-node": "^1.1.8",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "googleapis": "^128.0.0",
+    "i": "^0.3.7",
+    "npm": "^10.2.4",
     "playwright-chromium": "^1.40.1",
-    "shelljs": "^0.8.5"
+    "shelljs": "^0.8.5",
+    "webhook-discord": "^3.7.8"
   },
   "scripts": {
     "start": "node dist/src.js"

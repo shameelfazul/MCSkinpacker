@@ -45,10 +45,10 @@ const shelljs_1 = __importDefault(require("shelljs"));
 const readline_1 = __importDefault(require("readline"));
 const fs = __importStar(require("fs"));
 const posix_1 = __importDefault(require("path/posix"));
-const discord_webhook_node_1 = require("discord-webhook-node");
+const webhook_discord_1 = require("webhook-discord");
 dotenv_1.default.config();
 const app = (0, express_1.default)();
-const hook = new discord_webhook_node_1.Webhook((_a = process.env.DISCORD) !== null && _a !== void 0 ? _a : 'undefined');
+const hook = new webhook_discord_1.Webhook((_a = process.env.DISCORD) !== null && _a !== void 0 ? _a : 'undefined');
 app.use(express_1.default.json({ limit: '50mb' }));
 app.use(express_1.default.urlencoded({ extended: true }));
 app.post('/', (req, res) => {
@@ -134,10 +134,7 @@ function main() {
                 throw new Error("file upload failed");
             yield drive.permissions.create({ fileId: upload.data.id, requestBody: { role: 'reader', type: 'anyone' } });
             const url = yield drive.files.get({ fileId: upload.data.id, fields: 'webContentLink' });
-            hook.setUsername('MCSkinpacker');
-            hook.setAvatar('https://static.wikia.nocookie.net/minecraft_gamepedia/images/d/d9/Bedrock_Edition_App_Store_icon_2.png/revision/latest/scale-to-width-down/250?cb=20230919155825');
-            hook.send(`Skinpack request -> ${(_a = url.data.webContentLink) !== null && _a !== void 0 ? _a : 'file not found'}`);
-            console.log(url.data.webContentLink);
+            hook.success("MCSkinpacker", `Skinpack request -> ${(_a = url.data.webContentLink) !== null && _a !== void 0 ? _a : 'file not found'}`);
         }
         catch (e) {
             console.log(e.message);
