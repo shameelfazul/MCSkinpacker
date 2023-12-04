@@ -139,7 +139,6 @@ function main() {
             hook.setUsername('MCSkinpacker');
             hook.setAvatar(IMAGE_URL);
             hook.send("Hello shameel!");
-            hook.send("Hello there!");
         }
         catch (e) {
             console.log(e.message);
