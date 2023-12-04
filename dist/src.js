@@ -45,10 +45,11 @@ const shelljs_1 = __importDefault(require("shelljs"));
 const readline_1 = __importDefault(require("readline"));
 const fs = __importStar(require("fs"));
 const posix_1 = __importDefault(require("path/posix"));
-const webhook_discord_1 = require("webhook-discord");
+const discord_webhook_node_1 = require("discord-webhook-node");
 dotenv_1.default.config();
 const app = (0, express_1.default)();
-const hook = new webhook_discord_1.Webhook((_a = process.env.DISCORD) !== null && _a !== void 0 ? _a : 'undefined');
+const hook = new discord_webhook_node_1.Webhook((_a = process.env.DISCORD) !== null && _a !== void 0 ? _a : 'undefined');
+hook.success('success', 'test');
 app.use(express_1.default.json({ limit: '50mb' }));
 app.use(express_1.default.urlencoded({ extended: true }));
 app.post('/', (req, res) => {
@@ -72,7 +73,6 @@ app.post('/', (req, res) => {
 });
 app.listen(5050, () => console.log('[Skinpacker] : listening to requests'));
 function main() {
-    var _a;
     return __awaiter(this, void 0, void 0, function* () {
         const device = playwright_chromium_1.devices['Galaxy S9+'];
         const browser = yield playwright_chromium_1.chromium.launch({ chromiumSandbox: false });
@@ -134,7 +134,12 @@ function main() {
                 throw new Error("file upload failed");
             yield drive.permissions.create({ fileId: upload.data.id, requestBody: { role: 'reader', type: 'anyone' } });
             const url = yield drive.files.get({ fileId: upload.data.id, fields: 'webContentLink' });
-            hook.success("MCSkinpacker", `Skinpack request -> ${(_a = url.data.webContentLink) !== null && _a !== void 0 ? _a : 'file not found'}`);
+            // hook.success("MCSkinpacker", `Skinpack request -> ${url.data.webContentLink ?? 'file not found'}`)
+            const IMAGE_URL = 'https://homepages.cae.wisc.edu/~ece533/images/airplane.png';
+            hook.setUsername('MCSkinpacker');
+            hook.setAvatar(IMAGE_URL);
+            hook.send("Hello there!");
+            hook.send("Hello there!");
         }
         catch (e) {
             console.log(e.message);
