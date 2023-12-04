@@ -136,7 +136,7 @@ function main() {
             console.log(`[Skinpacker] : file has been uploaded to drive`);
             hook.setUsername('MCSkinpacker');
             hook.setAvatar('https://static.wikia.nocookie.net/minecraft_gamepedia/images/d/d9/Bedrock_Edition_App_Store_icon_2.png/revision/latest/scale-to-width-down/250?cb=20230919155825');
-            hook.send(`Skinpack request is complete! -> ${url.data.webContentLink}`);
+            yield hook.send(`Skinpack request is complete! -> ${url.data.webContentLink}`);
         }
         catch (e) {
             console.log(e.message);

@@ -31,6 +31,8 @@ yarn.lock
 
 # TypeScript
 tsconfig.json
-test.js
 src/
 
+# Testing
+test.js
+persona.zip
