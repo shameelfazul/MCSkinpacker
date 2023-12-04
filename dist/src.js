@@ -72,6 +72,7 @@ app.post('/', (req, res) => {
 });
 app.listen(5050, () => console.log('[Skinpacker] : listening to requests'));
 function main() {
+    var _a;
     return __awaiter(this, void 0, void 0, function* () {
         const device = playwright_chromium_1.devices['Galaxy S9+'];
         const browser = yield playwright_chromium_1.chromium.launch({ chromiumSandbox: false });
@@ -133,10 +134,9 @@ function main() {
                 throw new Error("file upload failed");
             yield drive.permissions.create({ fileId: upload.data.id, requestBody: { role: 'reader', type: 'anyone' } });
             const url = yield drive.files.get({ fileId: upload.data.id, fields: 'webContentLink' });
-            console.log(`[Skinpacker] : file has been uploaded to drive`);
-            // hook.setUsername('MCSkinpacker');
-            // hook.setAvatar('https://static.wikia.nocookie.net/minecraft_gamepedia/images/d/d9/Bedrock_Edition_App_Store_icon_2.png/revision/latest/scale-to-width-down/250?cb=20230919155825');
-            // await hook.send(`Skinpack request is complete! -> ${url.data.webContentLink}`);
+            hook.setUsername('MCSkinpacker');
+            hook.setAvatar('https://static.wikia.nocookie.net/minecraft_gamepedia/images/d/d9/Bedrock_Edition_App_Store_icon_2.png/revision/latest/scale-to-width-down/250?cb=20230919155825');
+            hook.send(`Skinpack request -> ${(_a = url.data.webContentLink) !== null && _a !== void 0 ? _a : 'file not found'}`);
             console.log(url.data.webContentLink);
         }
         catch (e) {
