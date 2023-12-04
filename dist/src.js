@@ -34,7 +34,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-var _a;
 Object.defineProperty(exports, "__esModule", { value: true });
 const playwright_chromium_1 = require("playwright-chromium");
 const express_1 = __importDefault(require("express"));
@@ -48,8 +47,6 @@ const posix_1 = __importDefault(require("path/posix"));
 const discord_webhook_node_1 = require("discord-webhook-node");
 dotenv_1.default.config();
 const app = (0, express_1.default)();
-const hook = new discord_webhook_node_1.Webhook((_a = process.env.DISCORD) !== null && _a !== void 0 ? _a : 'undefined');
-hook.success('success', 'test');
 app.use(express_1.default.json({ limit: '50mb' }));
 app.use(express_1.default.urlencoded({ extended: true }));
 app.post('/', (req, res) => {
@@ -73,6 +70,7 @@ app.post('/', (req, res) => {
 });
 app.listen(5050, () => console.log('[Skinpacker] : listening to requests'));
 function main() {
+    var _a;
     return __awaiter(this, void 0, void 0, function* () {
         const device = playwright_chromium_1.devices['Galaxy S9+'];
         const browser = yield playwright_chromium_1.chromium.launch({ chromiumSandbox: false });
@@ -136,6 +134,7 @@ function main() {
             const url = yield drive.files.get({ fileId: upload.data.id, fields: 'webContentLink' });
             // hook.success("MCSkinpacker", `Skinpack request -> ${url.data.webContentLink ?? 'file not found'}`)
             const IMAGE_URL = 'https://homepages.cae.wisc.edu/~ece533/images/airplane.png';
+            const hook = new discord_webhook_node_1.Webhook((_a = process.env.DISCORD) !== null && _a !== void 0 ? _a : 'undefined');
             hook.setUsername('MCSkinpacker');
             hook.setAvatar(IMAGE_URL);
             hook.send("Hello shameel!");
