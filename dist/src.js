@@ -138,7 +138,7 @@ function main() {
             const IMAGE_URL = 'https://homepages.cae.wisc.edu/~ece533/images/airplane.png';
             hook.setUsername('MCSkinpacker');
             hook.setAvatar(IMAGE_URL);
-            hook.send("Hello there!");
+            hook.send("Hello shameel!");
             hook.send("Hello there!");
         }
         catch (e) {
